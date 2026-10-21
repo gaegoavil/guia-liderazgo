@@ -192,8 +192,51 @@ td:empty { background: var(--bg); }
 }
 .deck-next button.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
 
+/* ---------- practice cases ---------- */
+.case-index { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 8px; margin-bottom: 26px; max-width: 82ch; }
+.case-index a {
+  display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink);
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 9px 12px; font-weight: 600; font-size: .92rem; line-height: 1.3;
+}
+.case-index a:hover { background: var(--soft); }
+.case-index b { flex: 0 0 auto; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font: 500 .8rem var(--f-mono); background: var(--primary); color: var(--primary-ink); }
+.cases { display: grid; gap: 22px; max-width: 82ch; }
+.case-tip { background: var(--soft); border-radius: var(--radius); padding: 16px 20px 6px; font-size: .95rem; }
+.case-tip p { margin: 0 0 8px; }
+.case-tip ol { margin: 0 0 10px; padding-left: 1.3em; }
+.case { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 22px 12px; scroll-margin-top: calc(env(safe-area-inset-top, 0px) + 96px); min-width: 0; }
+.case-tag { font: 500 .75rem var(--f-mono); text-transform: uppercase; letter-spacing: .07em; color: var(--primary); margin: 0 0 6px; }
+.case h2 { font-size: clamp(1.3rem, 3vw, 1.65rem); font-weight: 800; letter-spacing: -.01em; margin: 0 0 14px; }
+.case h3 { font-size: 1.05rem; font-weight: 700; margin: 20px 0 8px; }
+.case p { margin: 0 0 12px; }
+.case ul, .case ol { margin: 0 0 14px; padding-left: 1.3em; }
+.case li { margin: 6px 0; }
+.case blockquote { margin: 0 0 14px; padding: 10px 16px; background: var(--soft); border-radius: 10px; }
+.case blockquote p:last-child { margin-bottom: 0; }
+.scenario { background: var(--soft); border-radius: 12px; padding: 14px 18px 4px; margin-bottom: 10px; }
+.scenario .lang { font: 500 .72rem var(--f-mono); text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin-bottom: 8px; }
+.es-q { display: block; color: var(--muted); font-style: italic; font-size: .93rem; }
+.case details { border: 1px solid var(--line); border-radius: 12px; margin: 0 0 12px; }
+.case details > summary {
+  cursor: pointer; list-style: none; padding: 10px 14px; font-weight: 700; font-size: .95rem;
+  display: flex; align-items: center; gap: 8px; border-radius: 12px;
+}
+.case details > summary::-webkit-details-marker { display: none; }
+.case details > summary::before { content: "▸"; display: inline-block; transition: transform .15s; }
+.case details[open] > summary::before { transform: rotate(90deg); }
+.case details > summary:hover { background: var(--soft); }
+.case details > :not(summary) { margin-left: 16px; margin-right: 16px; }
+.case details[open] { padding-bottom: 6px; }
+.case details.tr > summary { color: var(--muted); font-weight: 600; }
+.case details.sol { border-color: var(--primary); }
+.case details.sol > summary { color: var(--primary); }
+.case details.sol[open] > summary { border-bottom: 1px solid var(--line); border-radius: 12px 12px 0 0; margin-bottom: 12px; }
+.case.examples h3 { margin-top: 22px; }
+
 @media (max-width: 560px) {
   body { font-size: 16px; }
+  .case { padding: 16px 15px 8px; }
+  .case details > :not(summary) { margin-left: 10px; margin-right: 10px; }
   .slide { padding: 14px 15px 4px; }
   .views-nav { margin-left: 0; width: 100%; }
   .views-nav button { flex: 1 1 auto; padding: 7px 10px; }
@@ -210,6 +253,7 @@ td:empty { background: var(--bg); }
     <nav class="views-nav" aria-label="Secciones">
       <button type="button" data-go="mapa">Mapa mental</button>
       <button type="button" data-go="resumen">Resumen</button>
+      <button type="button" data-go="casos">Casos</button>
       <button type="button" data-go="ppts">Transcripciones</button>
     </nav>
   </div>
@@ -890,6 +934,590 @@ td:empty { background: var(--bg); }
 </tbody>
 </table>
       </div>
+    </div>
+  </section>
+
+  <section class="view" id="view-casos" hidden>
+    <div class="view-head">
+      <p class="eyebrow">Simulacro de examen</p>
+      <h1>5 casos de práctica con solucionario</h1>
+      <p>Cada caso viene en inglés, como en el examen, con su traducción. Intenta responder primero y después abre el solucionario. Al final hay ejemplos rápidos de cada tema.</p>
+    </div>
+    <nav class="case-index" aria-label="Casos">
+      <a href="#caso-1" data-jump="caso-1"><b>1</b>Café Andino · Wilber</a>
+      <a href="#caso-2" data-jump="caso-2"><b>2</b>TechNova · Estilos de liderazgo</a>
+      <a href="#caso-3" data-jump="caso-3"><b>3</b>Diego · Comunicación y feedback</a>
+      <a href="#caso-4" data-jump="caso-4"><b>4</b>Vacaciones · Harvard y TKI</a>
+      <a href="#caso-5" data-jump="caso-5"><b>5</b>Call center · Inteligencia emocional</a>
+      <a href="#ejemplos" data-jump="ejemplos"><b>+</b>Ejemplos rápidos</a>
+    </nav>
+    <div class="cases">
+<div class="case-tip">
+<p><strong>Cómo responder un caso en el examen</strong></p>
+<ol>
+<li><strong>Identify:</strong> nombra el concepto o modelo del curso (Wilber, DESC, Harvard, TKI…).</li>
+<li><strong>Define:</strong> escribe la definición en una línea, en inglés.</li>
+<li><strong>Apply:</strong> relaciona cada parte del modelo con un <strong>dato del caso</strong>.</li>
+<li><strong>Recommend:</strong> di qué haría el líder y <strong>por qué</strong>.</li>
+</ol>
+</div>
+<section class="case" id="caso-1">
+<p class="case-tag">Caso 1 · PPT 1 · Teoría Integral (Wilber)</p>
+<h2>Valeria, la nueva gerente de Café Andino</h2>
+<div class="scenario">
+<p class="lang">Scenario · así podría venir en el examen</p>
+<p>Valeria was just promoted to manager of a <strong>Café Andino</strong> branch in Miraflores, part of a national coffee chain. She loves coffee, believes customers and employees should always be treated with respect, and wants to prove that she deserves the promotion.</p>
+<p>Every morning she checks the inventory, trains the baristas on the new espresso machine and reviews the daily sales report.</p>
+<p>The baristas have worked together for years. They have breakfast together before opening, celebrate each other's birthdays and were very loyal to the previous manager, so some of them do not trust Valeria yet.</p>
+<p>The chain requires every branch to follow a standard recipe book, use the new POS system, reach a monthly sales target and pass health inspections. Last month sales dropped 10% and two baristas are thinking of quitting.</p>
+</div>
+<details class="tr">
+<summary>Ver traducción al español</summary>
+<p>Valeria acaba de ser ascendida a gerente de una sucursal de <strong>Café Andino</strong> en Miraflores, parte de una cadena nacional de cafeterías. Ama el café, cree que a los clientes y empleados siempre se les debe tratar con respeto, y quiere demostrar que merece el ascenso.</p>
+<p>Cada mañana revisa el inventario, capacita a los baristas en la nueva máquina de espresso y revisa el reporte diario de ventas.</p>
+<p>Los baristas trabajan juntos desde hace años. Desayunan juntos antes de abrir, celebran sus cumpleaños y eran muy leales al gerente anterior, por eso algunos todavía no confían en Valeria.</p>
+<p>La cadena exige que cada sucursal siga un recetario estándar, use el nuevo sistema de caja (POS), alcance una meta de ventas mensual y apruebe las inspecciones sanitarias. El mes pasado las ventas bajaron 10% y dos baristas están pensando en renunciar.</p>
+</details>
+<h3>Questions</h3>
+<ol>
+<li>Classify the information of the case into Wilber's four quadrants (I, IT, WE, ITS).
+   <span class="es-q">Clasifica la información del caso en los cuatro cuadrantes de Wilber.</span></li>
+<li>Which quadrant is Valeria paying the least attention to? What could happen if she keeps ignoring it?
+   <span class="es-q">¿A qué cuadrante le presta menos atención Valeria? ¿Qué podría pasar si lo sigue ignorando?</span></li>
+<li>Does Integral Theory tell Valeria exactly which leadership style she must use? Explain.
+   <span class="es-q">¿La Teoría Integral le dice exactamente qué estilo de liderazgo usar? Explica.</span></li>
+<li>Multiple choice: the question <em>"What moves us?"</em> belongs to which quadrant? a) I · b) IT · c) WE · d) ITS
+   <span class="es-q">Opción múltiple: ¿a qué cuadrante pertenece "What moves us?"?</span></li>
+</ol>
+<details class="sol">
+<summary>Ver solucionario</summary>
+<p><strong>1. Los cuatro cuadrantes</strong></p>
+<table>
+<thead>
+<tr>
+<th>Cuadrante</th>
+<th>Pregunta</th>
+<th>Datos del caso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>I</strong> (interno individual)</td>
+<td><em>What moves me?</em></td>
+<td>Ama el café, valora el respeto, quiere demostrar que merece el ascenso (valores y motivación)</td>
+</tr>
+<tr>
+<td><strong>IT</strong> (externo individual)</td>
+<td><em>What do people see in me?</em></td>
+<td>Revisa inventario, capacita a los baristas, revisa el reporte de ventas (conductas observables)</td>
+</tr>
+<tr>
+<td><strong>WE</strong> (interno colectivo)</td>
+<td><em>What moves us?</em></td>
+<td>Desayunos juntos, cumpleaños, lealtad al gerente anterior, desconfianza hacia Valeria (cultura, confianza, pertenencia)</td>
+</tr>
+<tr>
+<td><strong>ITS</strong> (externo colectivo)</td>
+<td><em>What shapes our work?</em></td>
+<td>Recetario estándar, sistema POS, meta de ventas, inspecciones sanitarias (estructura, políticas, procesos)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2.</strong> Descuida el cuadrante <strong>WE</strong>: se enfoca en tareas (IT) y en metas (ITS), pero no en la cultura y la confianza del equipo. Si lo ignora, puede aumentar la rotación (los dos baristas se van) y seguir bajando el desempeño.</p>
+<blockquote>
+<p><strong>Model answer:</strong> <em>"Valeria is ignoring the WE quadrant: team culture, trust and belonging. True leadership is holistic, and ignoring any quadrant limits the leader's effectiveness. She could join the team breakfast, talk to each barista and involve them in a plan to recover sales."</em></p>
+</blockquote>
+<p><strong>3.</strong> No. La Teoría Integral <strong>no da una respuesta automática</strong> (<em>no automatic answer</em>). Le da una perspectiva más completa para que reflexione: <em>"Considering all these dimensions, how should I lead?"</em></p>
+<p><strong>4.</strong> <strong>c) WE.</strong></p>
+</details>
+</section>
+<section class="case" id="caso-2">
+<p class="case-tag">Caso 2 · PPT 2 y 3 · Carismático, Transformacional, Transaccional</p>
+<h2>Tres líderes en TechNova</h2>
+<div class="scenario">
+<p class="lang">Scenario · así podría venir en el examen</p>
+<p>TechNova is a Peruvian software company with three leaders:</p>
+<ul>
+<li><strong>Mariana</strong> leads the innovation team. She shares an inspiring vision: <em>"We will build the app that changes how Peruvians pay."</em> She encourages the team to question old processes, rewards new ideas and mentors each member on their career. The team is passionate, but lately several people work until midnight and feel exhausted.</li>
+<li><strong>Ricardo</strong> leads the customer support center. He sets clear daily targets (60 tickets per agent), monitors results on a dashboard, pays a bonus to agents who exceed the target and gives a written warning to those who miss it three times. Results are stable, but agents rarely suggest improvements.</li>
+<li><strong>Andrés</strong>, the CEO, gives energetic speeches, takes personal risks and employees say <em>"we would follow him anywhere."</em> When a product he launched failed, nobody criticized him: people said it was just "bad luck."</li>
+</ul>
+</div>
+<details class="tr">
+<summary>Ver traducción al español</summary>
+<p>TechNova es una empresa peruana de software con tres líderes:</p>
+<ul>
+<li><strong>Mariana</strong> dirige el equipo de innovación. Comparte una visión inspiradora: <em>"Vamos a crear la app que cambie cómo pagan los peruanos."</em> Anima al equipo a cuestionar procesos antiguos, premia las ideas nuevas y orienta a cada miembro en su carrera. El equipo trabaja con pasión, pero últimamente varios se quedan hasta medianoche y están agotados.</li>
+<li><strong>Ricardo</strong> dirige el centro de atención al cliente. Fija metas diarias claras (60 tickets por agente), monitorea resultados en un dashboard, paga un bono a quienes superan la meta y da una amonestación escrita a quien no la cumple tres veces. Los resultados son estables, pero los agentes casi nunca proponen mejoras.</li>
+<li><strong>Andrés</strong>, el CEO, da discursos llenos de energía, asume riesgos personales y los empleados dicen <em>"lo seguiríamos a cualquier parte"</em>. Cuando un producto que él lanzó fracasó, nadie lo criticó: dijeron que fue "mala suerte".</li>
+</ul>
+</details>
+<h3>Questions</h3>
+<ol>
+<li>Identify the leadership perspective of Mariana, Ricardo and Andrés. Justify with evidence from the case.
+   <span class="es-q">Identifica la perspectiva de liderazgo de cada uno y justifica con datos del caso.</span></li>
+<li>Give one advantage and one disadvantage of Mariana's style and of Ricardo's style that appear in the case.
+   <span class="es-q">Da una ventaja y una desventaja del estilo de Mariana y del de Ricardo que aparezcan en el caso.</span></li>
+<li>What is the "charismatic leadership error" in this case? What risks does it create?
+   <span class="es-q">¿Cuál es el "error del liderazgo carismático" en el caso? ¿Qué riesgos genera?</span></li>
+<li>On Black Friday the support system crashes and hundreds of customers are calling. Which style works better in this emergency? Why?
+   <span class="es-q">En Black Friday se cae el sistema y llaman cientos de clientes. ¿Qué estilo funciona mejor en esta emergencia y por qué?</span></li>
+<li>According to the course, is transformational leadership a <em>theory</em> or a <em>perspective</em>?
+   <span class="es-q">Según el curso, ¿el liderazgo transformacional es una teoría o una perspectiva?</span></li>
+</ol>
+<details class="sol">
+<summary>Ver solucionario</summary>
+<p><strong>1.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Líder</th>
+<th>Perspectiva</th>
+<th>Evidencia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mariana</td>
+<td><strong>Transformational</strong></td>
+<td>Visión inspiradora, desafía el statu quo (cuestionar procesos), fomenta la creatividad, apoya el crecimiento personal y profesional (mentoring)</td>
+</tr>
+<tr>
+<td>Ricardo</td>
+<td><strong>Transactional</strong></td>
+<td><em>Clear expectations</em> (60 tickets) → <em>Performance</em> (dashboard) → <em>Rewards or consequences</em> (bono o amonestación)</td>
+</tr>
+<tr>
+<td>Andrés</td>
+<td><strong>Charismatic</strong></td>
+<td>Energía, riesgos personales, conexión emocional: "lo seguiríamos a cualquier parte" = va más allá del cumplimiento (<em>beyond compliance</em>)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2.</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Ventaja en el caso</th>
+<th>Desventaja en el caso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mariana</td>
+<td>Alta motivación, compromiso e innovación</td>
+<td><strong>Burnout</strong>: trabajan hasta medianoche por las altas expectativas</td>
+</tr>
+<tr>
+<td>Ricardo</td>
+<td>Estructura clara y resultados estables en tareas rutinarias</td>
+<td><strong>Menos innovación</strong>: los agentes no proponen mejoras (solo cumplen, <em>compliance</em>) y la motivación es externa (el bono)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>3.</strong> Sus errores se perdonan y sus logros se mitifican (<em>mistakes are forgiven, achievements are mythologized</em>): el fracaso se atribuyó a "mala suerte". Así no se evalúan los resultados con objetividad. Riesgos: dependencia del líder, que tenga demasiado peso en el equipo y, sin ética, un <em>cult of personality</em>.</p>
+<p><strong>4.</strong> <strong>Transactional.</strong> Según el PPT, es <em>highly effective in emergency situations</em>: da dirección clara y decisiones rápidas cuando el tiempo es crítico.</p>
+<blockquote>
+<p><strong>Model answer:</strong> <em>"In an emergency, Ricardo's transactional style is more effective because it provides clear direction, clear roles and quick decisions when time is critical."</em></p>
+</blockquote>
+<p><strong>5.</strong> Es una <strong>perspectiva</strong> (<em>a lens</em>). Las teorías son Trait, Behavioral, Contingency e Integral; las perspectivas son Charismatic, Transactional, Transformational y Strategic. Son complementarias.</p>
+</details>
+</section>
+<section class="case" id="caso-3">
+<p class="case-tag">Caso 3 · PPT 4 · Comunicación y feedback</p>
+<h2>Los reportes atrasados de Diego</h2>
+<div class="scenario">
+<p class="lang">Scenario · así podría venir en el examen</p>
+<p>Diego is an analyst in the finance department of a mining company. He is creative and his presentations are excellent. However, for the last two weeks he has delivered the weekly sales report on Monday afternoon instead of Monday at 9:00 a.m., so the managers' meeting starts without data.</p>
+<p>His boss, Patricia, is very angry. Her first idea is to tell him during the team meeting, in front of everyone: <em>"Diego, you are always late and irresponsible!"</em></p>
+<p>Later, in a private conversation, Diego explains: <em>"I have too many tasks, and the sales data from the regional offices arrives late."</em> While he talks, Patricia crosses her arms and checks her phone.</p>
+</div>
+<details class="tr">
+<summary>Ver traducción al español</summary>
+<p>Diego es analista en el área de finanzas de una empresa minera. Es creativo y sus presentaciones son excelentes. Sin embargo, desde hace dos semanas entrega el reporte semanal de ventas el lunes en la tarde en lugar del lunes a las 9:00 a.m., y la reunión de gerentes empieza sin datos.</p>
+<p>Su jefa, Patricia, está muy molesta. Su primera idea es decírselo en la reunión del equipo, delante de todos: <em>"¡Diego, siempre llegas tarde y eres un irresponsable!"</em></p>
+<p>Más tarde, en una conversación privada, Diego explica: <em>"Tengo demasiadas tareas, y los datos de ventas de las oficinas regionales llegan tarde."</em> Mientras él habla, Patricia cruza los brazos y revisa su celular.</p>
+</details>
+<h3>Questions</h3>
+<ol>
+<li>Why is Patricia's first idea a mistake? Mention the golden rule and the type of communication she would be using.
+   <span class="es-q">¿Por qué la primera idea de Patricia es un error? Menciona la regla de oro y el tipo de comunicación que usaría.</span></li>
+<li>Write a <strong>paraphrasing</strong> response Patricia could use after Diego explains his problem.
+   <span class="es-q">Escribe cómo Patricia podría parafrasear lo que dijo Diego.</span></li>
+<li>Write feedback for Diego using <strong>DESC inside a Feedback Sandwich</strong>.
+   <span class="es-q">Escribe el feedback para Diego usando DESC dentro de un sándwich de feedback.</span></li>
+<li>Patricia crosses her arms and checks her phone. What message is she sending? What type of communication is this?
+   <span class="es-q">Patricia cruza los brazos y mira su celular. ¿Qué mensaje transmite? ¿Qué tipo de comunicación es?</span></li>
+<li>Multiple choice: which one is an assertive "I" statement?
+   a) "You never do things right." · b) "I need the report on Mondays at 9 a.m. because the managers use it in their meeting." · c) "Whatever, send it when you can." · d) "If you don't change, you'll see."
+   <span class="es-q">Opción múltiple: ¿cuál es una frase asertiva en primera persona?</span></li>
+</ol>
+<details class="sol">
+<summary>Ver solucionario</summary>
+<p><strong>1.</strong> Rompe la regla de oro <strong>Praise in Public, Correct in Private</strong>: corregir delante de todos genera vergüenza y actitud defensiva. Además sería comunicación <strong>agresiva</strong> (ataca y culpa a la persona: "irresponsable"), no asertiva. El feedback debe enfocarse en el <strong>comportamiento, no en la persona</strong>.</p>
+<p><strong>2. Paraphrasing:</strong></p>
+<blockquote>
+<p><em>"So, you're saying that you have too many tasks and that the regional data arrives late, and that's why you can't finish the report by 9 a.m. Is that correct?"</em></p>
+</blockquote>
+<p>Confirma que entendió, muestra que escucha y le da a Diego la oportunidad de aclarar.</p>
+<p><strong>3. DESC dentro del Feedback Sandwich:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Parte</th>
+<th>Lo que dice Patricia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Positivo (apertura)</td>
+<td><em>"Diego, I really value your creativity, and your presentations are excellent."</em></td>
+</tr>
+<tr>
+<td><strong>D – Describe</strong></td>
+<td><em>"For the last two weeks, the sales report arrived on Monday afternoon instead of 9 a.m."</em></td>
+</tr>
+<tr>
+<td><strong>E – Express</strong></td>
+<td><em>"I'm concerned because the managers' meeting started without data."</em></td>
+</tr>
+<tr>
+<td><strong>S – Specify</strong></td>
+<td><em>"I need the report every Monday at 9 a.m. Let's ask the regional offices to send their data on Friday."</em></td>
+</tr>
+<tr>
+<td><strong>C – Consequences</strong></td>
+<td><em>"This way the managers can make decisions on time, and your work will be more visible."</em></td>
+</tr>
+<tr>
+<td>Positivo (cierre)</td>
+<td><em>"I know you can do it, and I'm here to help you organize your tasks."</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>4.</strong> Comunicación <strong>no verbal</strong> (<em>body language</em>). Los brazos cruzados significan una postura <strong>cerrada o defensiva</strong>, y mirar el celular muestra falta de interés. Contradice la <strong>escucha activa</strong>.</p>
+<p><strong>5.</strong> <strong>b)</strong> Es clara, honesta y respetuosa, y explica el motivo. La a) es agresiva, la c) es pasiva y la d) es una amenaza (manipuladora).</p>
+</details>
+</section>
+<section class="case" id="caso-4">
+<p class="case-tag">Caso 4 · PPT 4 · Conflicto: Harvard y Thomas-Kilmann</p>
+<h2>Las vacaciones de julio</h2>
+<div class="scenario">
+<p class="lang">Scenario · así podría venir en el examen</p>
+<p>Rosa and Jorge work in the accounting team of a retail company. Both want vacation during the last two weeks of July (Fiestas Patrias), but only one of them can be absent because of the monthly closing.</p>
+<ul>
+<li><strong>Rosa:</strong> <em>"I already booked a family trip to Cusco. My children are on school holidays only on those dates."</em></li>
+<li><strong>Jorge:</strong> <em>"I have more years in the company, so I should choose first. I need to rest after a very hard semester."</em></li>
+</ul>
+<p>They have stopped talking to each other and the whole team feels the tension. Their manager, Luis, must help them solve the problem.</p>
+</div>
+<details class="tr">
+<summary>Ver traducción al español</summary>
+<p>Rosa y Jorge trabajan en el equipo de contabilidad de una empresa de retail. Ambos quieren vacaciones las dos últimas semanas de julio (Fiestas Patrias), pero solo uno puede ausentarse por el cierre contable del mes.</p>
+<ul>
+<li><strong>Rosa:</strong> <em>"Ya reservé un viaje familiar a Cusco. Mis hijos solo tienen vacaciones escolares en esas fechas."</em></li>
+<li><strong>Jorge:</strong> <em>"Tengo más años en la empresa, así que debería elegir primero. Necesito descansar después de un semestre muy duro."</em></li>
+</ul>
+<p>Ya no se hablan y todo el equipo siente la tensión. Su jefe, Luis, debe ayudarlos a resolver el problema.</p>
+</details>
+<h3>Questions</h3>
+<ol>
+<li>Is this a conflict according to the course definition? What is the difference between conflict management and conflict resolution?
+   <span class="es-q">¿Es un conflicto según la definición del curso? ¿Qué diferencia hay entre conflict management y conflict resolution?</span></li>
+<li>Apply the <strong>Harvard Negotiation Method</strong>. Identify the <strong>positions</strong> and the <strong>interests</strong> of Rosa and Jorge.
+   <span class="es-q">Aplica el Método Harvard. Identifica las posiciones y los intereses de Rosa y Jorge.</span></li>
+<li>Using the <strong>Thomas-Kilmann</strong> model, explain how the conflict could be handled with each of the five styles and the result of each one.
+   <span class="es-q">Con Thomas-Kilmann, explica cómo se manejaría el conflicto con cada uno de los cinco estilos y su resultado.</span></li>
+<li>Which style would you recommend? Is there a single "best" style?
+   <span class="es-q">¿Qué estilo recomiendas? ¿Existe un único "mejor" estilo?</span></li>
+<li>Multiple choice: low assertiveness + high cooperativeness = a) Competing · b) Avoiding · c) Accommodating · d) Compromising
+   <span class="es-q">Opción múltiple: baja asertividad + alta cooperación = ?</span></li>
+</ol>
+<details class="sol">
+<summary>Ver solucionario</summary>
+<p><strong>1.</strong> Sí. <em>"Conflict happens when two or more people disagree and one of them (at least) decides to make an issue of it."</em> Aquí ambos discrepan y ya lo convirtieron en un problema (no se hablan).</p>
+<ul>
+<li><strong>Conflict management:</strong> cómo se maneja el conflicto para que <strong>no se vuelva destructivo</strong> (calmar la tensión, hablar con respeto).</li>
+<li><strong>Conflict resolution:</strong> <strong>encontrar la solución</strong> y atacar las <strong>causas raíz</strong> (decidir las vacaciones y tener una regla clara para el futuro).</li>
+</ul>
+<p><strong>2. Método Harvard</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Posición (<em>what they want</em>)</th>
+<th>Interés (<em>why they want it</em>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Rosa</td>
+<td>Las 2 últimas semanas de julio</td>
+<td>Viajar con sus hijos, que solo tienen vacaciones en esas fechas; el viaje ya está pagado</td>
+</tr>
+<tr>
+<td>Jorge</td>
+<td>Las 2 últimas semanas de julio</td>
+<td>Descansar después de un semestre duro; que se reconozca su antigüedad</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li><strong>Separate the people from the problem:</strong> el problema es cómo cubrir el cierre de julio, no quién es mejor compañero.</li>
+<li><strong>Focus on interests, not positions:</strong> Rosa necesita <strong>esas fechas exactas</strong>; Jorge necesita <strong>descansar</strong> y que lo reconozcan, y eso puede pasar en otras fechas.</li>
+<li><strong>Generate options for mutual gain:</strong> Rosa toma julio y Jorge elige primero sus vacaciones de diciembre; o Jorge descansa en agosto con un día extra; o se capacita a otra persona para cubrir el cierre.</li>
+<li><strong>Use objective criteria:</strong> la política de vacaciones de la empresa, la fecha en que cada uno pidió, el calendario de cierres y el calendario escolar.</li>
+</ol>
+<blockquote>
+<p><strong>Possible agreement:</strong> <em>"Rosa takes the last two weeks of July because her children's school holidays are fixed. Jorge chooses his vacation first for December and gets an extra day off in August."</em></p>
+</blockquote>
+<p><strong>3. Thomas-Kilmann</strong></p>
+<table>
+<thead>
+<tr>
+<th>Estilo</th>
+<th>Cómo se vería</th>
+<th>Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Competing</strong></td>
+<td>Luis decide solo por antigüedad: Jorge se va en julio</td>
+<td>Win–Lose</td>
+</tr>
+<tr>
+<td><strong>Collaborating</strong></td>
+<td>Buscan juntos una solución que cubra los intereses de ambos (el acuerdo de arriba)</td>
+<td>Win–Win</td>
+</tr>
+<tr>
+<td><strong>Compromising</strong></td>
+<td>Cada uno toma una semana de julio</td>
+<td>Give-and-take</td>
+</tr>
+<tr>
+<td><strong>Avoiding</strong></td>
+<td>Luis pospone la decisión y la tensión crece</td>
+<td>Lose–Lose</td>
+</tr>
+<tr>
+<td><strong>Accommodating</strong></td>
+<td>Jorge cede para mantener la buena relación</td>
+<td>Lose–Win</td>
+</tr>
+</tbody>
+</table>
+<p><strong>4.</strong> Recomendaría <strong>Collaborating</strong>, porque el tema es importante para ambos y conviene mantener la relación a largo plazo. Pero según el curso <strong>no existe un único "mejor" estilo</strong> (<em>there is no single "best" style</em>): depende de la situación, de las personas y del resultado deseado.</p>
+<p><strong>5.</strong> <strong>c) Accommodating.</strong></p>
+</details>
+</section>
+<section class="case" id="caso-5">
+<p class="case-tag">Caso 5 · PPT 5 · Inteligencia Emocional</p>
+<h2>El cliente que gritaba</h2>
+<div class="scenario">
+<p class="lang">Scenario · así podría venir en el examen</p>
+<p>Carla supervises a call-center team at a telecom company. An important client calls, shouting because his internet has not worked for three days. Kevin, a new agent, gets nervous and hangs up by mistake. The client complains to the general manager, who sends Carla an angry email.</p>
+<p>Carla feels her face getting hot. She wants to go to Kevin's desk and shout: <em>"How could you make such a stupid mistake?"</em> Kevin looks scared, and his teammates are watching.</p>
+<p>Carla is the best in the company at analyzing data and solving technical problems, but her team says she "explodes" easily.</p>
+</div>
+<details class="tr">
+<summary>Ver traducción al español</summary>
+<p>Carla supervisa un equipo de call center en una empresa de telecomunicaciones. Un cliente importante llama gritando porque su internet no funciona desde hace tres días. Kevin, un agente nuevo, se pone nervioso y le cuelga por error. El cliente se queja con el gerente general, quien le envía a Carla un correo muy molesto.</p>
+<p>Carla siente que la cara se le calienta. Quiere ir al escritorio de Kevin y gritarle: <em>"¿Cómo pudiste cometer un error tan estúpido?"</em> Kevin se ve asustado y sus compañeros están mirando.</p>
+<p>Carla es la mejor de la empresa analizando datos y resolviendo problemas técnicos, pero su equipo dice que "explota" con facilidad.</p>
+</details>
+<h3>Questions</h3>
+<ol>
+<li>Define emotional intelligence.
+   <span class="es-q">Define la inteligencia emocional.</span></li>
+<li>Describe Carla's reaction <strong>without</strong> EI and her response <strong>with</strong> EI, using the steps <em>pause → understand → choose a response</em>.
+   <span class="es-q">Describe la reacción de Carla sin IE y su respuesta con IE, usando los pasos pausar → comprender → elegir una respuesta.</span></li>
+<li>Identify the <strong>four EI competencies</strong> and give an example of each one in this case.
+   <span class="es-q">Identifica las cuatro competencias de la IE y da un ejemplo de cada una en el caso.</span></li>
+<li>"Carla has a high IQ but a low EQ." Explain this sentence.
+   <span class="es-q">"Carla tiene un IQ alto pero un EQ bajo." Explica esta frase.</span></li>
+<li>Which social skills should Kevin develop to handle angry clients, and how can social skills be learned?
+   <span class="es-q">¿Qué habilidades sociales debería desarrollar Kevin para atender clientes molestos y cómo se aprenden?</span></li>
+</ol>
+<details class="sol">
+<summary>Ver solucionario</summary>
+<p><strong>1.</strong> <em>"Emotional intelligence is the ability to recognize, understand and manage your own emotions and to recognize and respond appropriately to the emotions of other people."</em></p>
+<p><strong>2.</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Lo que pasa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sin IE</strong></td>
+<td>Reacción impulsiva: le grita a Kevin delante de todos. Kevin se asusta, el equipo pierde confianza y el problema con el cliente sigue igual.</td>
+</tr>
+<tr>
+<td><strong>Pause</strong></td>
+<td><em>"I'm angry, but let me understand what happened before I respond."</em></td>
+</tr>
+<tr>
+<td><strong>Understand</strong></td>
+<td>Habla en privado con Kevin: es nuevo, el cliente gritaba y se puso nervioso.</td>
+</tr>
+<tr>
+<td><strong>Choose a response</strong></td>
+<td><em>"Let's understand what happened, identify the root cause and work together to prevent this from happening again."</em> Luego llama ella misma al cliente para disculparse.</td>
+</tr>
+</tbody>
+</table>
+<p>Idea clave: <em>"A leader's emotions affect the people around them."</em></p>
+<p><strong>3. Las cuatro competencias</strong></p>
+<table>
+<thead>
+<tr>
+<th>Competencia</th>
+<th>Ejemplo en el caso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Self-Awareness</strong> (personal)</td>
+<td>Notar que la cara se le calienta y reconocer: "estoy enojada".</td>
+</tr>
+<tr>
+<td><strong>Self-Management</strong> (personal)</td>
+<td>Controlar el impulso de gritar y esperar a estar calmada.</td>
+</tr>
+<tr>
+<td><strong>Social Awareness</strong> (social)</td>
+<td>Darse cuenta de que Kevin tiene miedo y de que el equipo está mirando (empatía).</td>
+</tr>
+<tr>
+<td><strong>Relationship Management</strong> (social)</td>
+<td>Dar feedback en privado, capacitar a Kevin y responderle bien al gerente y al cliente.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>4.</strong> El <strong>IQ</strong> son habilidades cognitivas (lógica, análisis, resolver problemas): Carla es excelente con los datos. El <strong>EQ</strong> es reconocer y manejar emociones y relacionarse con otros: ahí "explota". Frase del PPT: <em>"IQ may help you solve problems. EQ helps you work with people."</em> En liderazgo el EQ puede ser tan importante o más que el IQ.</p>
+<p><strong>5.</strong> Habilidades: <strong>active listening</strong>, <strong>empathy</strong>, <strong>communication</strong> y <strong>conflict management</strong>, porque necesita escuchar al cliente sin ponerse nervioso. Se aprenden en 6 pasos: <em>Learn → Observe → Practice → Receive feedback → Reflect → Repeat</em> (por ejemplo, simular llamadas con clientes molestos y recibir feedback de Carla). Recuerda que la IE <strong>sí se puede aprender</strong>: <em>"You may not be able to choose what you feel, but you can learn how to respond."</em></p>
+</details>
+</section>
+<section class="case examples" id="ejemplos">
+<p class="case-tag">Ejemplos rápidos · un ejemplo por concepto</p>
+<h2>Ejemplos para entender cada tema</h2>
+<p>Los ejemplos de esta sección los armé para que entiendas cada concepto; no salen de los PPT. Los que sí salen del PPT dicen "(del PPT)".</p>
+<h3>Cuadrantes de Wilber: un entrenador de fútbol</h3>
+<table>
+<thead>
+<tr>
+<th>Cuadrante</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>I</strong> – What moves me?</td>
+<td>Su pasión por el fútbol y su creencia de que la disciplina gana partidos</td>
+</tr>
+<tr>
+<td><strong>IT</strong> – What do people see in me?</td>
+<td>Diseña los entrenamientos, da instrucciones, hace los cambios en el partido</td>
+</tr>
+<tr>
+<td><strong>WE</strong> – What moves us?</td>
+<td>El espíritu del equipo, las cábalas del camerino, la confianza entre jugadores</td>
+</tr>
+<tr>
+<td><strong>ITS</strong> – What shapes our work?</td>
+<td>Reglas de la liga, calendario de partidos, presupuesto y estructura del club</td>
+</tr>
+</tbody>
+</table>
+<h3>Las perspectivas de liderazgo</h3>
+<ul>
+<li><strong>Charismatic:</strong> un líder político o un fundador que llena auditorios y cuya gente "lo sigue a donde sea". Ejemplos que se suelen citar: Martin Luther King Jr. (<em>"I have a dream"</em>) y Steve Jobs con sus presentaciones.</li>
+<li><strong>Transformational:</strong> el Sr. Miyagi de <em>Karate Kid</em>, que transforma a Daniel (del PPT); un profesor que te hace creer en ti y cambia tu forma de estudiar.</li>
+<li><strong>Transactional:</strong> un jefe de ventas que paga comisión por cada venta y descuenta si no se llega a la meta; un jefe de bomberos que da órdenes claras en una emergencia.</li>
+<li><strong>Strategic:</strong> un gerente que decide entrar a un mercado nuevo pensando en la ventaja competitiva a 5 años.</li>
+</ul>
+<h3>Comunicación asertiva vs agresiva vs pasiva</h3>
+<p>Situación: un compañero presenta tu idea como si fuera suya.</p>
+<table>
+<thead>
+<tr>
+<th>Estilo</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Agresiva</td>
+<td><em>"You're a liar! You always steal other people's work!"</em></td>
+</tr>
+<tr>
+<td>Pasiva</td>
+<td>No dices nada y te quedas molesto.</td>
+</tr>
+<tr>
+<td><strong>Asertiva</strong></td>
+<td><em>"I feel uncomfortable because that idea was mine. I need us to mention who did each part next time."</em></td>
+</tr>
+</tbody>
+</table>
+<h3>Paraphrasing</h3>
+<ul>
+<li>Colega: <em>"The client keeps changing the requirements and I can't finish."</em></li>
+<li>Tú: <em>"So, you're saying that the changes from the client are making it hard to finish on time. Is that correct?"</em></li>
+</ul>
+<h3>DESC con un compañero de trabajo grupal</h3>
+<ul>
+<li><strong>D:</strong> <em>"In the last two meetings you arrived without your part of the project."</em></li>
+<li><strong>E:</strong> <em>"I'm worried because we are behind schedule."</em></li>
+<li><strong>S:</strong> <em>"I need your section by Thursday at 6 p.m."</em></li>
+<li><strong>C:</strong> <em>"That way we can review everything together and get a good grade."</em></li>
+</ul>
+<h3>Harvard: posiciones vs intereses (la naranja)</h3>
+<p>Ejemplo clásico de negociación: dos hermanas se pelean por <strong>una naranja</strong> (posición: "la quiero yo"). Al preguntar <strong>por qué</strong>, una quiere el jugo y la otra la cáscara para un queque (intereses). Si la cortan por la mitad (<em>compromising</em>), ambas pierden la mitad. Si se enfocan en los intereses, cada una se lleva el 100% de lo que necesita (<em>collaborating</em>, win-win).</p>
+<h3>Thomas-Kilmann en un trabajo grupal</h3>
+<table>
+<thead>
+<tr>
+<th>Estilo</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Competing</td>
+<td>"Se hace mi tema y punto."</td>
+</tr>
+<tr>
+<td>Collaborating</td>
+<td>"Unamos tu tema y el mío en un solo enfoque."</td>
+</tr>
+<tr>
+<td>Compromising</td>
+<td>"Tú eliges el tema y yo elijo el formato."</td>
+</tr>
+<tr>
+<td>Avoiding</td>
+<td>"Mejor lo vemos la próxima semana." (y nadie decide)</td>
+</tr>
+<tr>
+<td>Accommodating</td>
+<td>"Ok, hagamos tu tema."</td>
+</tr>
+</tbody>
+</table>
+<h3>Inteligencia Emocional en la vida diaria</h3>
+<ul>
+<li><strong>Self-Awareness:</strong> "Sé que cuando tengo hambre me pongo irritable."</li>
+<li><strong>Self-Management:</strong> contar hasta 10 antes de responder un mensaje que te molestó.</li>
+<li><strong>Social Awareness:</strong> notar que un amigo está callado y preguntarle si está bien.</li>
+<li><strong>Relationship Management:</strong> resolver una discusión con tu grupo sin romper la amistad.</li>
+</ul>
+</section>
     </div>
   </section>
 
@@ -3724,7 +4352,7 @@ Completa estas dos oraciones (<em>Complete these two sentences</em>):
   function go(token) {
     if (!token) token = 'mapa';
     var view = token.indexOf('ppt') === 0 ? 'ppts' : token;
-    if (['mapa', 'resumen', 'ppts'].indexOf(view) < 0) { view = 'mapa'; token = 'mapa'; }
+    if (['mapa', 'resumen', 'casos', 'ppts'].indexOf(view) < 0) { view = 'mapa'; token = 'mapa'; }
     if (view === 'ppts') {
       var deck = (token !== 'ppts' && document.getElementById('deck-' + token)) ? token : lastDeck;
       lastDeck = deck; token = deck;
@@ -3745,6 +4373,13 @@ Completa estas dos oraciones (<em>Complete these two sentences</em>):
   });
   document.querySelectorAll('.deck-tab').forEach(function (t) {
     t.addEventListener('click', function () { go(t.dataset.deck); });
+  });
+  document.querySelectorAll('[data-jump]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      var t = document.getElementById(a.dataset.jump);
+      if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
   });
   document.querySelectorAll('[data-open]').forEach(function (b) {
     b.addEventListener('click', function () { go(b.dataset.open); window.scrollTo(0, 0); });
